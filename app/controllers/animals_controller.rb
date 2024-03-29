@@ -2,12 +2,16 @@ class AnimalsController < ApplicationController
 
   def index
     animals = Animal.all
-    render json: animals
+    render json: animals.to_json(include: [:sightings])
   end
 
   def show
-    animal = Animal.find(params[:id])
-    render json: animal
+    animal = Animal.find_by(id: params[:id])
+    if animal
+      render json: animal.to_json(include: [:sightings])
+    else
+      render json: { message: 'No sighting found with that id' }
+    end
   end
 
   def create
