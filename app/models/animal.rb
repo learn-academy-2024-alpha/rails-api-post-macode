@@ -1,3 +1,3 @@
 class Animal < ApplicationRecord
-  has_many :Sightings
+  has_many :sightings
 end
